@@ -10,8 +10,8 @@ def main(args=None):
     node = Node('no_simples')
 
     # # Define o nível do logger
-    logger = node.get_logger()
-    logger.set_level(LoggingSeverity.DEBUG)
+    #logger = node.get_logger()
+    #logger.set_level(LoggingSeverity.DEBUG)
 
     # Algumas impressões e exemplos de uso do logger
     node.get_logger().info('Parabéns, você criou o seu primeiro nó!')
