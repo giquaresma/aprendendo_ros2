@@ -1,0 +1,3 @@
+[console_scripts]
+meu_primeiro_no = meu_primeiro_pacote.meu_primeiro_no:main
+

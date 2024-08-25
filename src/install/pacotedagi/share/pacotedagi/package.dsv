@@ -1,0 +1,9 @@
+source;share/pacotedagi/hook/pythonpath.ps1
+source;share/pacotedagi/hook/pythonpath.dsv
+source;share/pacotedagi/hook/pythonpath.sh
+source;share/pacotedagi/hook/ament_prefix_path.ps1
+source;share/pacotedagi/hook/ament_prefix_path.dsv
+source;share/pacotedagi/hook/ament_prefix_path.sh
+source;../../build/pacotedagi/share/pacotedagi/hook/pythonpath_develop.ps1
+source;../../build/pacotedagi/share/pacotedagi/hook/pythonpath_develop.dsv
+source;../../build/pacotedagi/share/pacotedagi/hook/pythonpath_develop.sh

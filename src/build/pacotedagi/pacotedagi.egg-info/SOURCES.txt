@@ -1,0 +1,15 @@
+package.xml
+setup.cfg
+setup.py
+launch/launchdagi.py
+pacotedagi/__init__.py
+pacotedagi/nodagi.py
+pacotedagi/nodagi2.py
+pacotedagi.egg-info/PKG-INFO
+pacotedagi.egg-info/SOURCES.txt
+pacotedagi.egg-info/dependency_links.txt
+pacotedagi.egg-info/entry_points.txt
+pacotedagi.egg-info/requires.txt
+pacotedagi.egg-info/top_level.txt
+pacotedagi.egg-info/zip-safe
+resource/pacotedagi

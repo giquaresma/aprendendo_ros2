@@ -1,0 +1,20 @@
+[0.613s] Invoking command in '/home/robot/ws_aprendendo_ros2/src/pacotedagi': PYTHONPATH=/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/prefix_override:/home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pacotedagi build --build-base /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build install --record /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log --single-version-externally-managed
+[0.856s] running egg_info
+[0.857s] writing ../build/pacotedagi/pacotedagi.egg-info/PKG-INFO
+[0.858s] writing dependency_links to ../build/pacotedagi/pacotedagi.egg-info/dependency_links.txt
+[0.858s] writing entry points to ../build/pacotedagi/pacotedagi.egg-info/entry_points.txt
+[0.859s] writing requirements to ../build/pacotedagi/pacotedagi.egg-info/requires.txt
+[0.860s] writing top-level names to ../build/pacotedagi/pacotedagi.egg-info/top_level.txt
+[0.861s] reading manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+[0.862s] writing manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+[0.862s] running build
+[0.863s] running build_py
+[0.864s] running install
+[0.865s] running install_lib
+[0.866s] running install_data
+[0.867s] running install_egg_info
+[0.867s] removing '/home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi-0.0.0-py3.10.egg-info' (and everything under it)
+[0.868s] Copying ../build/pacotedagi/pacotedagi.egg-info to /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi-0.0.0-py3.10.egg-info
+[0.869s] running install_scripts
+[0.885s] writing list of installed files to '/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log'
+[0.904s] Invoked command in '/home/robot/ws_aprendendo_ros2/src/pacotedagi' returned '0': PYTHONPATH=/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/prefix_override:/home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pacotedagi build --build-base /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build install --record /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log --single-version-externally-managed

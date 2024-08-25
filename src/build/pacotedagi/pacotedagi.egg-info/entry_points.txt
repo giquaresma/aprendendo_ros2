@@ -1,0 +1,4 @@
+[console_scripts]
+nodagi = pacotedagi.nodagi:main
+nodagi2 = pacotedagi.nodagi2:main
+

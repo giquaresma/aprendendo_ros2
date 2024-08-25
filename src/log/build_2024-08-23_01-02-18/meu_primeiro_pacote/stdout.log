@@ -1,0 +1,37 @@
+running egg_info
+creating ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info
+writing ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/PKG-INFO
+writing dependency_links to ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/dependency_links.txt
+writing entry points to ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/entry_points.txt
+writing requirements to ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/requires.txt
+writing top-level names to ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/top_level.txt
+writing manifest file '../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/SOURCES.txt'
+reading manifest file '../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/SOURCES.txt'
+writing manifest file '../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build
+creating /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build/lib
+creating /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build/lib/meu_primeiro_pacote
+copying meu_primeiro_pacote/__init__.py -> /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build/lib/meu_primeiro_pacote
+copying meu_primeiro_pacote/meu_primeiro_no.py -> /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build/lib/meu_primeiro_pacote
+running install
+running install_lib
+creating /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu_primeiro_pacote
+copying /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build/lib/meu_primeiro_pacote/__init__.py -> /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu_primeiro_pacote
+copying /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/build/lib/meu_primeiro_pacote/meu_primeiro_no.py -> /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu_primeiro_pacote
+byte-compiling /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu_primeiro_pacote/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu_primeiro_pacote/meu_primeiro_no.py to meu_primeiro_no.cpython-310.pyc
+running install_data
+creating /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/ament_index
+creating /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/ament_index/resource_index
+creating /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/ament_index/resource_index/packages
+copying resource/meu_primeiro_pacote -> /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/ament_index/resource_index/packages
+copying package.xml -> /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/meu_primeiro_pacote
+creating /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/meu_primeiro_pacote/launch
+copying launch/meu_primeiro_launch.py -> /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/share/meu_primeiro_pacote/launch
+running install_egg_info
+Copying ../build/meu_primeiro_pacote/meu_primeiro_pacote.egg-info to /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu_primeiro_pacote-0.1.0-py3.10.egg-info
+running install_scripts
+Installing meu_primeiro_no script to /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/meu_primeiro_pacote
+writing list of installed files to '/home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote/install.log'

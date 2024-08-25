@@ -1,0 +1,31 @@
+running egg_info
+creating ../build/pacotedagi/pacotedagi.egg-info
+writing ../build/pacotedagi/pacotedagi.egg-info/PKG-INFO
+writing dependency_links to ../build/pacotedagi/pacotedagi.egg-info/dependency_links.txt
+writing entry points to ../build/pacotedagi/pacotedagi.egg-info/entry_points.txt
+writing requirements to ../build/pacotedagi/pacotedagi.egg-info/requires.txt
+writing top-level names to ../build/pacotedagi/pacotedagi.egg-info/top_level.txt
+writing manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+reading manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+writing manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build
+creating /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib
+creating /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib/pacotedagi
+copying pacotedagi/__init__.py -> /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib/pacotedagi
+running install
+running install_lib
+creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi
+copying /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib/pacotedagi/__init__.py -> /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi
+byte-compiling /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index
+creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index/resource_index
+creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index/resource_index/packages
+copying resource/pacotedagi -> /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index/resource_index/packages
+copying package.xml -> /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/pacotedagi
+running install_egg_info
+Copying ../build/pacotedagi/pacotedagi.egg-info to /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log'

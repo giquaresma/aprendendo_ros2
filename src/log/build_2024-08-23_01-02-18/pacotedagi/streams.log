@@ -1,0 +1,33 @@
+[0.653s] Invoking command in '/home/robot/ws_aprendendo_ros2/src/pacotedagi': PYTHONPATH=/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/prefix_override:/home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pacotedagi build --build-base /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build install --record /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log --single-version-externally-managed
+[0.903s] running egg_info
+[0.903s] creating ../build/pacotedagi/pacotedagi.egg-info
+[0.904s] writing ../build/pacotedagi/pacotedagi.egg-info/PKG-INFO
+[0.904s] writing dependency_links to ../build/pacotedagi/pacotedagi.egg-info/dependency_links.txt
+[0.905s] writing entry points to ../build/pacotedagi/pacotedagi.egg-info/entry_points.txt
+[0.905s] writing requirements to ../build/pacotedagi/pacotedagi.egg-info/requires.txt
+[0.906s] writing top-level names to ../build/pacotedagi/pacotedagi.egg-info/top_level.txt
+[0.906s] writing manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+[0.908s] reading manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+[0.909s] writing manifest file '../build/pacotedagi/pacotedagi.egg-info/SOURCES.txt'
+[0.909s] running build
+[0.910s] running build_py
+[0.910s] creating /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build
+[0.910s] creating /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib
+[0.911s] creating /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib/pacotedagi
+[0.911s] copying pacotedagi/__init__.py -> /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib/pacotedagi
+[0.912s] running install
+[0.912s] running install_lib
+[0.913s] creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi
+[0.914s] copying /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build/lib/pacotedagi/__init__.py -> /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi
+[0.915s] byte-compiling /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi/__init__.py to __init__.cpython-310.pyc
+[0.915s] running install_data
+[0.916s] creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index
+[0.916s] creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index/resource_index
+[0.917s] creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index/resource_index/packages
+[0.917s] copying resource/pacotedagi -> /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/ament_index/resource_index/packages
+[0.918s] copying package.xml -> /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/share/pacotedagi
+[0.918s] running install_egg_info
+[0.920s] Copying ../build/pacotedagi/pacotedagi.egg-info to /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi-0.0.0-py3.10.egg-info
+[0.922s] running install_scripts
+[0.941s] writing list of installed files to '/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log'
+[0.961s] Invoked command in '/home/robot/ws_aprendendo_ros2/src/pacotedagi' returned '0': PYTHONPATH=/home/robot/ws_aprendendo_ros2/src/build/pacotedagi/prefix_override:/home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/pacotedagi build --build-base /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/build install --record /home/robot/ws_aprendendo_ros2/src/build/pacotedagi/install.log --single-version-externally-managed

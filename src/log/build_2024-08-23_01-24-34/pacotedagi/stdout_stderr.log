@@ -1,0 +1,16 @@
+running develop
+running egg_info
+writing pacotedagi.egg-info/PKG-INFO
+writing dependency_links to pacotedagi.egg-info/dependency_links.txt
+writing entry points to pacotedagi.egg-info/entry_points.txt
+writing requirements to pacotedagi.egg-info/requires.txt
+writing top-level names to pacotedagi.egg-info/top_level.txt
+reading manifest file 'pacotedagi.egg-info/SOURCES.txt'
+writing manifest file 'pacotedagi.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/python3.10/site-packages/pacotedagi.egg-link (link to .)
+Installing nodagi script to /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/pacotedagi
+Installing nodagi2 script to /home/robot/ws_aprendendo_ros2/src/install/pacotedagi/lib/pacotedagi
+
+Installed /home/robot/ws_aprendendo_ros2/src/build/pacotedagi
+running install_data

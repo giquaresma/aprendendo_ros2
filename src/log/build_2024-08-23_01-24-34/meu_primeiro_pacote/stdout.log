@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing meu_primeiro_pacote.egg-info/PKG-INFO
+writing dependency_links to meu_primeiro_pacote.egg-info/dependency_links.txt
+writing entry points to meu_primeiro_pacote.egg-info/entry_points.txt
+writing requirements to meu_primeiro_pacote.egg-info/requires.txt
+writing top-level names to meu_primeiro_pacote.egg-info/top_level.txt
+reading manifest file 'meu_primeiro_pacote.egg-info/SOURCES.txt'
+writing manifest file 'meu_primeiro_pacote.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/python3.10/site-packages/meu-primeiro-pacote.egg-link (link to .)
+Installing meu_primeiro_no script to /home/robot/ws_aprendendo_ros2/src/install/meu_primeiro_pacote/lib/meu_primeiro_pacote
+
+Installed /home/robot/ws_aprendendo_ros2/src/build/meu_primeiro_pacote
+running install_data

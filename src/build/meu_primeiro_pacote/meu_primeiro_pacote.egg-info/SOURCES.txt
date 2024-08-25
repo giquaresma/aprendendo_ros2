@@ -1,0 +1,14 @@
+package.xml
+setup.cfg
+setup.py
+launch/meu_primeiro_launch.py
+meu_primeiro_pacote/__init__.py
+meu_primeiro_pacote/meu_primeiro_no.py
+meu_primeiro_pacote.egg-info/PKG-INFO
+meu_primeiro_pacote.egg-info/SOURCES.txt
+meu_primeiro_pacote.egg-info/dependency_links.txt
+meu_primeiro_pacote.egg-info/entry_points.txt
+meu_primeiro_pacote.egg-info/requires.txt
+meu_primeiro_pacote.egg-info/top_level.txt
+meu_primeiro_pacote.egg-info/zip-safe
+resource/meu_primeiro_pacote

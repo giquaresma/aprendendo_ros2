@@ -1,0 +1,18 @@
+running develop
+running egg_info
+writing pacote_de_exemplos.egg-info/PKG-INFO
+writing dependency_links to pacote_de_exemplos.egg-info/dependency_links.txt
+writing entry points to pacote_de_exemplos.egg-info/entry_points.txt
+writing requirements to pacote_de_exemplos.egg-info/requires.txt
+writing top-level names to pacote_de_exemplos.egg-info/top_level.txt
+reading manifest file 'pacote_de_exemplos.egg-info/SOURCES.txt'
+writing manifest file 'pacote_de_exemplos.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/robot/ws_aprendendo_ros2/src/install/pacote_de_exemplos/lib/python3.10/site-packages/pacote-de-exemplos.egg-link (link to .)
+Installing checkpoints script to /home/robot/ws_aprendendo_ros2/src/install/pacote_de_exemplos/lib/pacote_de_exemplos
+Installing no_com_classe script to /home/robot/ws_aprendendo_ros2/src/install/pacote_de_exemplos/lib/pacote_de_exemplos
+Installing no_simples script to /home/robot/ws_aprendendo_ros2/src/install/pacote_de_exemplos/lib/pacote_de_exemplos
+Installing r2d2 script to /home/robot/ws_aprendendo_ros2/src/install/pacote_de_exemplos/lib/pacote_de_exemplos
+
+Installed /home/robot/ws_aprendendo_ros2/src/build/pacote_de_exemplos
+running install_data

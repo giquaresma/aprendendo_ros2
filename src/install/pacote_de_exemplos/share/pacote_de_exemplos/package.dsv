@@ -1,0 +1,9 @@
+source;share/pacote_de_exemplos/hook/pythonpath.ps1
+source;share/pacote_de_exemplos/hook/pythonpath.dsv
+source;share/pacote_de_exemplos/hook/pythonpath.sh
+source;share/pacote_de_exemplos/hook/ament_prefix_path.ps1
+source;share/pacote_de_exemplos/hook/ament_prefix_path.dsv
+source;share/pacote_de_exemplos/hook/ament_prefix_path.sh
+source;../../build/pacote_de_exemplos/share/pacote_de_exemplos/hook/pythonpath_develop.ps1
+source;../../build/pacote_de_exemplos/share/pacote_de_exemplos/hook/pythonpath_develop.dsv
+source;../../build/pacote_de_exemplos/share/pacote_de_exemplos/hook/pythonpath_develop.sh
