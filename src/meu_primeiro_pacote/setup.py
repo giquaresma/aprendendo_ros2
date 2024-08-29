@@ -20,7 +20,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'meu_primeiro_no =  meu_primeiro_pacote.meu_primeiro_no:main'
+            'meu_primeiro_no =  meu_primeiro_pacote.meu_primeiro_no:main',
+            'no_com_classe = meu_primeiro_pacote.no_com_classe:main',
+            'talker = meu_primeiro_pacote.talker:main',
+            'listener = meu_primeiro_pacote.listener:main',
+            'r2d2 = meu_primeiro_pacote.r2d2:main',
         ],
     },
 )

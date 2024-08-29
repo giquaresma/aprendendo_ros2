@@ -19,4 +19,18 @@ def generate_launch_description():
             executable='meu_primeiro_no',
             arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
         ),
+
+        Node(
+            name='talker',
+            package='meu_primeiro_pacote',
+            executable='talker',
+            arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+        ),
+
+        Node(
+            name='listener',
+            package='meu_primeiro_pacote',
+            executable='listener',
+            arguments=['--ros-args', '--log-level', LaunchConfiguration('log_level')]
+        ),
     ])
