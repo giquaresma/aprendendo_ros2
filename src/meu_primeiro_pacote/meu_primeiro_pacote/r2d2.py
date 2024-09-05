@@ -1,4 +1,5 @@
 import rclpy
+import numpy
 from rclpy.node import Node
 
 from sensor_msgs.msg import LaserScan
@@ -44,14 +45,39 @@ class R2D2(Node):
         self.pub_cmd_vel.publish(self.ir_para_frente)
         rclpy.spin_once(self)
 
+        error = 0
+        integral = 0
+        dif_erro = 0
+        old_error = 0
+
+        distancia_objetivo = 2
+        p_gain = 0.01 # valores iniciais
+        i_gain = 0.00 # que precisam
+        d_gain = 0.01 # ser ajustados
+
+
         self.get_logger().info ('Entrando no loop princial do nó.')
         while(rclpy.ok):
             rclpy.spin_once(self)
 
             self.get_logger().debug ('Atualizando as distancias lidas pelo laser.')
+            distancia_direita = numpy.array(self.laser[0:10]).mean()
             self.distancia_direita   = min((self.laser[  0: 80])) # -90 a -10 graus
             self.distancia_frente    = min((self.laser[ 80:100])) # -10 a  10 graus
             self.distancia_esquerda  = min((self.laser[100:180])) #  10 a  90 graus
+
+            error = distancia_objetivo - distancia_direita
+            integral = integral + error 
+            dif_erro = error - old_error
+            old_error = error
+              
+            power = p_gain*error + i_gain*integral + d_gain*dif_erro
+
+            cmd = Twist()
+            cmd.linear.x = 0.5
+            cmd.angular.z = power
+            self.pub_cmd_vel.publish(cmd)
+
 
             self.get_logger().debug ("Distância para o obstáculo" + str(self.distancia_frente))
             if(self.distancia_frente < 1.5):
