@@ -27,6 +27,8 @@ class R2D2(Node):
         self.get_logger().debug ('Definindo o publisher de controle do robo: "/cmd_Vel"')
         self.pub_cmd_vel = self.create_publisher(Twist, '/cmd_vel', 10)
 
+        self.mestados = 0
+
     def listener_callback_laser(self, msg):
         self.laser = msg.ranges
        
@@ -50,8 +52,9 @@ class R2D2(Node):
         dif_erro = 0
         old_error = 0
 
+        distancia_virar = 16
         distancia_objetivo = 2
-        p_gain = 0.01 # valores iniciais
+        p_gain = 5.00 # valores iniciais
         i_gain = 0.00 # que precisam
         d_gain = 0.01 # ser ajustados
 
@@ -65,24 +68,32 @@ class R2D2(Node):
             self.distancia_direita   = min((self.laser[  0: 80])) # -90 a -10 graus
             self.distancia_frente    = min((self.laser[ 80:100])) # -10 a  10 graus
             self.distancia_esquerda  = min((self.laser[100:180])) #  10 a  90 graus
-
-            error = distancia_objetivo - distancia_direita
-            integral = integral + error 
-            dif_erro = error - old_error
-            old_error = error
-              
-            power = p_gain*error + i_gain*integral + d_gain*dif_erro
-
+            
             cmd = Twist()
-            cmd.linear.x = 0.5
-            cmd.angular.z = power
-            self.pub_cmd_vel.publish(cmd)
+
+            if self.mestados == 0: #sem obstaculos
+                error = distancia_objetivo - distancia_direita
+                integral = integral + error 
+                dif_erro = error - old_error
+                old_error = error
+                    
+                power = p_gain*error + i_gain*integral + d_gain*dif_erro
+
+                cmd.linear.x = 0.5
+                cmd.angular.z = power
+                self.pub_cmd_vel.publish(cmd)
 
 
-            self.get_logger().debug ("Distância para o obstáculo" + str(self.distancia_frente))
-            if(self.distancia_frente < 1.5):
-                self.get_logger().info ('Obstáculo detectado.')
-                break
+                self.get_logger().debug ("Distância para o obstáculo" + str(self.distancia_frente))
+                if(self.distancia_frente < distancia_objetivo):
+                    self.get_logger().info ('Obstáculo detectado.')
+                    self.mestados = 1
+
+            elif self.mestados == 1: #com obstaculos
+                cmd.angular.z = 1.0
+                self.pub_cmd_vel.publish(cmd)
+                if(self.distancia_frente > 15):
+                    self.mestados = 0
 
         self.get_logger().info ('Ordenando o robô: "parar"')
         self.pub_cmd_vel.publish(self.parar)
