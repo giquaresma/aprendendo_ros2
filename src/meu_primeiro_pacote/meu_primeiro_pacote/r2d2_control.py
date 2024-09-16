@@ -1,6 +1,9 @@
 import rclpy
 import numpy
 import tf_transformations
+import time
+import math
+from math import *
 from rclpy.node import Node
 
 from sensor_msgs.msg import LaserScan
@@ -8,8 +11,6 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist, Vector3
 
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy
-
-
 
 class R2D2(Node):
 
@@ -31,6 +32,21 @@ class R2D2(Node):
         self.pub_cmd_vel = self.create_publisher(Twist, '/cmd_vel', 10)
 
         self.mestados = 0
+        self.wait(0.5)
+        self.dist = 0.0
+        self.dr2d2 = 0.0
+    
+    def untillnine(self):
+        obj = [9,9]
+        self.dist = math.dist((self.pose.position.x, self.pose.position.y), obj)
+        #tentar angulo_rad = math.atan2(dy, dx)
+
+    def wait(self, max_seconds):
+        start = time.time()
+        count = 0
+        while count < max_seconds:
+            count = time.time() - start            
+            rclpy.spin_once(self)
 
     def listener_callback_laser(self, msg):
         self.laser = msg.ranges
@@ -39,12 +55,6 @@ class R2D2(Node):
         self.pose = msg.pose.pose
 
     def run(self):
-         
-        self.pose.orientation #orientation
-        self.pose.position #posicao
-
-        _, _, yaw = tf_transformations.euler_from_quaternion([self.pose.orientation.x, self.pose.orientation.y, self.pose.orientation.z, self.pose.orientation.w]) #aqui so precisa usar o yaw
-
         self.get_logger().debug ('Executando uma iteração do loop de processamento de mensagens.')
         rclpy.spin_once(self)
 
@@ -56,20 +66,13 @@ class R2D2(Node):
         self.pub_cmd_vel.publish(self.ir_para_frente)
         rclpy.spin_once(self)
 
-        error = 0
-        integral = 0
-        dif_erro = 0
-        old_error = 0
-
-        distancia_virar = 16
-        distancia_objetivo = 2
-        p_gain = 5.00 # valores iniciais
-        i_gain = 0.00 # que precisam
-        d_gain = 0.01 # ser ajustados
-
-
         self.get_logger().info ('Entrando no loop princial do nó.')
         while(rclpy.ok):
+            
+            self.pose.orientation #orientation
+            self.pose.position #posicao
+            _, _, yaw = tf_transformations.euler_from_quaternion([self.pose.orientation.x, self.pose.orientation.y, self.pose.orientation.z, self.pose.orientation.w]) #aqui so precisa usar o yaw
+        
             rclpy.spin_once(self)
 
             self.get_logger().debug ('Atualizando as distancias lidas pelo laser.')
@@ -79,30 +82,50 @@ class R2D2(Node):
             self.distancia_esquerda  = min((self.laser[100:180])) #  10 a  90 graus
             
             cmd = Twist()
+            self.untillnine()
+            
 
-            if self.mestados == 0: #sem obstaculos,  reto
-                error = distancia_objetivo - distancia_direita
-                integral = integral + error 
-                dif_erro = error - old_error
-                old_error = error
-                    
-                power = p_gain*error + i_gain*integral + d_gain*dif_erro
-
-                cmd.linear.x = 0.5
-                cmd.angular.z = power
+            if self.mestados == 0:
+                cmd.angular.z = 0.1
                 self.pub_cmd_vel.publish(cmd)
 
-
-                self.get_logger().debug ("Distância para o obstáculo" + str(self.distancia_frente))
-                if(self.distancia_frente < distancia_objetivo):
-                    self.get_logger().info ('Obstáculo detectado.')
+                if(yaw >= ):
+                    cmd.angular.z = 0.0
+                    self.pub_cmd_vel.publish(cmd)
+                    self.get_logger().info ('olhando para (9;9), dist=' + str(self.dist) + 'dr2d2=' + str(self.pose.position.x)+ str(self.pose.position.y))
+                    #print(self.dist, self.distancia_frente)
                     self.mestados = 1
+        
+            elif self.mestados == 1: #sem obstaculos,  reto
+                self.get_logger().info ('estado = 1')
+                if(self.distancia_frente > self.distancia_direita and self.distancia_frente > self.distancia_esquerda and self.distancia_frente > 1):
+                    self.get_logger().info ('frente mais livre')
+                    self.mestados = 2
+                elif(self.distancia_esquerda > self.distancia_direita and self.distancia_esquerda > self.distancia_frente ):
+                    cmd.angular.z = 0.5
+                    self.get_logger().info ('frente não é a mais livre ainda, virando esquerda')
+                    self.pub_cmd_vel.publish(cmd)
+                elif(self.distancia_direita > self.distancia_frente and self.distancia_direita > self.distancia_esquerda ):
+                    cmd.angular.z = -0.5
+                    self.get_logger().info ('frente não é a mais livre ainda, virando direita')
+                    self.pub_cmd_vel.publish(cmd)
 
-            elif self.mestados == 1: #com obstaculos
-                cmd.angular.z = 1.0
-                self.pub_cmd_vel.publish(cmd)
-                if(self.distancia_frente > 15):
-                    self.mestados = 0
+            elif self.mestados == 2: #com obstaculos
+                    self.get_logger().info ('estado = 2, andando')
+                    cmd.linear.x = 0.5
+                    self.pub_cmd_vel.publish(cmd)
+                    self.get_logger().debug ("Distância para o obstáculo" + str(self.distancia_frente))
+                
+                    if (self.distancia_frente < self.distancia_direita or self.distancia_frente < self.distancia_esquerda or self.distancia_frente < 1):
+                        self.get_logger().info ('frente com obstaculos')
+                        self.mestados = 0
+                    if(self.dist == 0):
+                        cmd.angular.z = 0.0
+                        cmd.linear.x = 0.0
+                        self.pub_cmd_vel.publish(cmd)
+                        self.get_logger().info ('CHEGOUUUUU')
+
+
 
         self.get_logger().info ('Ordenando o robô: "parar"')
         self.pub_cmd_vel.publish(self.parar)
