@@ -35,11 +35,13 @@ class R2D2(Node):
         self.wait(0.5)
         self.dist = 0.0
         self.dr2d2 = 0.0
+        self.angulo_robo = 0.0
     
     def untillnine(self):
         obj = [9,9]
         self.dist = math.dist((self.pose.position.x, self.pose.position.y), obj)
-        #tentar angulo_rad = math.atan2(dy, dx)
+        #tentar 
+        self.angulo_robo = math.atan2(9 - self.pose.position.x, 9 - self.pose.position.y)
 
     def wait(self, max_seconds):
         start = time.time()
@@ -82,14 +84,18 @@ class R2D2(Node):
             self.distancia_esquerda  = min((self.laser[100:180])) #  10 a  90 graus
             
             cmd = Twist()
+            self.erro_ang = self.angulo_robo - yaw
             self.untillnine()
             
 
             if self.mestados == 0:
-                cmd.angular.z = 0.1
-                self.pub_cmd_vel.publish(cmd)
-
-                if(yaw >= ):
+                if(abs(self.erro_ang) >= 0.06):
+                    cmd.angular.z = 0.4
+                    self.pub_cmd_vel.publish(cmd)
+                    self.get_logger().info ('TENTANDO VIRAR PRO 99 CALMA')
+                elif( self.dist <= 3 and abs(self.erro_ang) <= 0.06):
+                    self.mestados = 2                
+                else:
                     cmd.angular.z = 0.0
                     self.pub_cmd_vel.publish(cmd)
                     self.get_logger().info ('olhando para (9;9), dist=' + str(self.dist) + 'dr2d2=' + str(self.pose.position.x)+ str(self.pose.position.y))
@@ -109,6 +115,10 @@ class R2D2(Node):
                     cmd.angular.z = -0.5
                     self.get_logger().info ('frente não é a mais livre ainda, virando direita')
                     self.pub_cmd_vel.publish(cmd)
+                else:
+                    cmd.angular.z = 0.5
+                    self.pub_cmd_vel.publish(cmd)
+                    self.get_logger().info ('NÃO SEI O QUE FAZER ESTOU APENAS GIRANDO!!!!!')
 
             elif self.mestados == 2: #com obstaculos
                     self.get_logger().info ('estado = 2, andando')
@@ -116,16 +126,18 @@ class R2D2(Node):
                     self.pub_cmd_vel.publish(cmd)
                     self.get_logger().debug ("Distância para o obstáculo" + str(self.distancia_frente))
                 
-                    if (self.distancia_frente < self.distancia_direita or self.distancia_frente < self.distancia_esquerda or self.distancia_frente < 1):
+                    if(self.dist <= 3 and self.dist >=1 and abs(self.erro_ang) <= 0.06):
+                        cmd.linear.x = 0.5
+                        self.pub_cmd_vel.publish(cmd)
+                        self.get_logger().info ('TO INDO CALMA')
+                    elif (self.distancia_frente < self.distancia_direita and self.distancia_frente < self.distancia_esquerda or self.distancia_frente < 1):
                         self.get_logger().info ('frente com obstaculos')
                         self.mestados = 0
-                    if(self.dist == 0):
+                    if(self.dist <= 0.8):
                         cmd.angular.z = 0.0
                         cmd.linear.x = 0.0
                         self.pub_cmd_vel.publish(cmd)
                         self.get_logger().info ('CHEGOUUUUU')
-
-
 
         self.get_logger().info ('Ordenando o robô: "parar"')
         self.pub_cmd_vel.publish(self.parar)
