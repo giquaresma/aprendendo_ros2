@@ -71,8 +71,8 @@ class R2D2(Node):
         self.get_logger().info ('Entrando no loop princial do nó.')
         while(rclpy.ok):
             
-            self.pose.orientation #orientation
-            self.pose.position #posicao
+            #self.pose.orientation #orientation
+            #self.pose.position #posicao
             _, _, yaw = tf_transformations.euler_from_quaternion([self.pose.orientation.x, self.pose.orientation.y, self.pose.orientation.z, self.pose.orientation.w]) #aqui so precisa usar o yaw
         
             rclpy.spin_once(self)
