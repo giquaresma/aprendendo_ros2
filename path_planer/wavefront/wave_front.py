@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-pgmf = open('my_map.pgm', 'rb')
+pgmf = open('src/my_map.pgm', 'rb')
 image = plt.imread(pgmf)
 
 
@@ -14,6 +14,13 @@ robo = (350, 50) #define onde ta meu robo
 #para visualização inicial, os dois são pretos
 image_copia[goal[0]][goal[1]] = 0 #objetivo é 0
 image_copia[robo[0]][robo[1]] = 0 #robo é 0
+
+fig = plt.figure()
+fig.canvas.manager.set_window_title('Figura 1')
+
+plt.imshow(image_copia, interpolation='nearest', cmap='gray')
+plt.title('Imagem inicial')
+plt.show()
 
 #tentativa 3
 image_copia[goal[0]][goal[1]] = 2 #objetivo é 2
@@ -28,7 +35,6 @@ while(1):
     soma += 1
     for l in range (-1,2):
         for c in range (-1,2):
-           #print(c, l)
             try:
                 if(image_copia[ponto[0]+l][ponto[1]+c] == 1):
                     image_copia[ponto[0]+ l][ponto[1]+c]= soma
@@ -37,7 +43,6 @@ while(1):
                 if(ponto[0]+l == robo[0] and ponto[1]+c == robo[1]):
                     parar = True
                     break
-                #print(ponto[0]+l, ponto[1]+c)
             except: 
                 continue
         if(parar == True):
@@ -47,6 +52,15 @@ while(1):
             
     ponto = coordenadas.pop(0)
 
+fig = plt.figure()
+fig.canvas.manager.set_window_title('Figura 2')
+
+plt.imshow(image_copia, interpolation='nearest', cmap='viridis')  # Usando viridis para ver os valores
+plt.colorbar()
+plt.title('Imagem colorida de proximidade')
+plt.show()
+
+#achando o melhor caminho para a tragetoria
 
 ponto_inicial = robo
 caminho = [list(robo)]
@@ -69,7 +83,6 @@ while(1):
                 if(ponto_inicial[0]+l == goal[0] and ponto_inicial[1]+c == goal[1]):
                     parar = True
                     break
-                # print(menor_posicao[0]+l, menor_posicao[1]+c)
             except: 
                 continue
 
@@ -77,7 +90,6 @@ while(1):
             break 
 
     ponto_inicial = menor_posicao
-    #print("parou quadrado")
     caminho.append(menor_posicao)
 
     if(parar == True):
