@@ -139,3 +139,5 @@ for i in caminho:
     image_com_caminho[i[0]][i[1]] = [254, 0, 0]
 
 plt.imshow(image_com_caminho)
+plt.title('Imagem com caminho')
+plt.show()
