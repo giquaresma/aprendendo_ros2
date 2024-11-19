@@ -66,11 +66,11 @@ while np.linalg.norm(goal - posicao_atual) > 2:
     caminho.append(posicao_atual.astype(int))
 
     if np.linalg.norm(posicao_atual - ultimo_passo) < tolerancia_movimento:
-        print("O robô está preso em um ponto. Tentando aplicar ruído para sair.")
+        print("robô preso em um ponto")
         ultimo_passo += ruido_aleatorio
 
     if len(caminho) > 1200:
-        print("O caminho é longo demais, verifique parâmetros.")
+        print("caminho é longo demais")
         break
 
 image_com_caminho = cv2.cvtColor(image.copy(), cv2.COLOR_GRAY2RGB)
@@ -79,5 +79,5 @@ for ponto in caminho:
         image_com_caminho[ponto[0], ponto[1]] = [0, 255, 0]
 
 plt.imshow(image_com_caminho)
-plt.title('Campos Potenciais (Caminho Suavizado)')
+plt.title('Campos Potenciais')
 plt.show()
