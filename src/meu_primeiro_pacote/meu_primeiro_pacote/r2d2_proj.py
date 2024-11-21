@@ -217,8 +217,8 @@ class R2D2(Node):
 
         while(rclpy.ok):
             
-            self.pose.orientation #orientation
-            self.pose.position #posicao
+            #self.pose.orientation #orientation
+            #self.pose.position #posicao
             _, _, yaw = tf_transformations.euler_from_quaternion([self.pose.orientation.x, self.pose.orientation.y, self.pose.orientation.z, self.pose.orientation.w]) #aqui so precisa usar o yaw
         
             rclpy.spin_once(self)
@@ -237,6 +237,16 @@ class R2D2(Node):
             self.get_logger().info (' estado = ' + str(self.mestados) + ' erro de angulo: ' + str(self.erro_ang) + ' dist ponto:' + str(self.dist))
             self.get_logger().info ( ' ponto atual: ' + str(self.novoponto)  + ' prox ponto:' + str(self.proxponto))
 
+            if(self.dist <= 0.2):
+                cmd.angular.z = 0.0
+                cmd.linear.x = 0.0
+                self.pub_cmd_vel.publish(cmd)
+                self.get_logger().info ('CHEGOUUUUU')
+                
+                self.novoponto = self.caminho_simulacao.pop(0)
+                #self.mestados = 0
+                #self.get_logger().debug ("caminho " + str(self.caminho_simulacao))
+
             #olhar para o ponto
             if self.mestados == 0:
 
@@ -251,6 +261,7 @@ class R2D2(Node):
                     self.get_logger().info ('olhando para (9;9), dist=' + str(self.dist) + 'dr2d2=' + str(self.pose.position.x)+ str(self.pose.position.y))
                     #print(self.dist, self.distancia_frente)
                     self.mestados = 1
+                
         
             elif self.mestados == 1: #andando para o ponto
 
@@ -258,23 +269,12 @@ class R2D2(Node):
                 cmd.linear.x = 0.5
                 self.pub_cmd_vel.publish(cmd)
                 self.get_logger().debug ("Distância para o ponto" + str(self.dist))
-                 
-                if(self.dist <= 0.2):
-                    cmd.angular.z = 0.0
-                    cmd.linear.x = 0.0
-                    self.pub_cmd_vel.publish(cmd)
-                    self.get_logger().info ('CHEGOUUUUU')
-                    self.mestados = 2
+
                 
-                elif(self.dist > 1 or self.erro_ang >=0.9):
+                if(self.dist > 1 or self.erro_ang >=0.5):
                     self.mestados = 0
 
-            elif self.mestados == 2:
-                self.novoponto = self.caminho_simulacao.pop(0)
-                self.mestados = 0
-                self.get_logger().debug ("caminho " + str(self.caminho_simulacao))
 
-                
 
         self.get_logger().info ('Ordenando o robô: "parar"')
         self.pub_cmd_vel.publish(self.parar)
