@@ -182,15 +182,18 @@ class R2D2(Node):
 
         self.caminho = caminho
 
+    
+
     def transf_coord(self, caminho):
         caminho_simulacao = []
         for y, x in caminho:
-            # Rotacionar 90 graus (invertendo as coordenadas e ajustando o sinal)
-            # (y, x) -> (x, -y)
+            # Centralizar as coordenadas (0,0) do mapa real para (0,0) da simulação
+            centralizado_x = x - 200
+            centralizado_y = y - 200
             
-            # Ajustar a escala para a simulação (de 0-400 para -10 a 10)
-            sim_x = (x / 400) * 20 - 10  # A coordenada x no mapa vai para o eixo y na simulação
-            sim_y = (y / 400) * -20 + 10  # A coordenada y no mapa vai para o eixo x na simulação, mas com sinal invertido
+            # Ajustar a escala para a simulação (0-400 -> -10 a 10)
+            sim_x = (centralizado_x / 200) * 10  # 200 porque metade de 400 equivale a 10 unidades
+            sim_y = (centralizado_y / 200) * -10  # Invertido para ajustar a rotação
             
             # Adicionar a coordenada transformada
             caminho_simulacao.append((sim_x, sim_y))
@@ -237,7 +240,7 @@ class R2D2(Node):
             self.get_logger().info (' estado = ' + str(self.mestados) + ' erro de angulo: ' + str(self.erro_ang) + ' dist ponto:' + str(self.dist))
             self.get_logger().info ( ' ponto atual: ' + str(self.novoponto)  + ' prox ponto:' + str(self.proxponto))
 
-            if(self.dist <= 0.2):
+            if(self.dist <= 0.2 and abs(self.erro_ang) <= 0.04):
                 cmd.angular.z = 0.0
                 cmd.linear.x = 0.0
                 self.pub_cmd_vel.publish(cmd)
