@@ -37,6 +37,7 @@ class R2D2(Node):
         self.get_logger().debug ('Definindo o publisher de controle do robo: "/cmd_Vel"')
         self.pub_cmd_vel = self.create_publisher(Twist, '/cmd_vel', 10)
 
+        self.indice = 0
         self.mestados = 0
         self.wait(0.5)
         self.dist = 0.0
@@ -49,7 +50,7 @@ class R2D2(Node):
         obj = self.novoponto
         self.dist = math.dist((self.pose.position.x, self.pose.position.y), obj)
         #tentar 
-        self.angulo_robo = math.atan2(obj[0] - self.pose.position.x, obj[1] - self.pose.position.y)
+        self.angulo_robo = math.atan2(obj[1] - self.pose.position.y, obj[0] - self.pose.position.x)
 
 
     def wait(self, max_seconds):
@@ -71,8 +72,12 @@ class R2D2(Node):
 
         image_copia = 1.0 * (image > 250)
 
-        goal = (40, 300) 
-        robo = (360, 80)
+        kernel = np.ones((18, 18), np.uint8)
+        img_dilation = cv2.erode(image_copia, kernel, iterations=1) 
+        image_copia = img_dilation
+
+        goal = (200, 175)
+        robo = (100, 200)
 
         image_copia[goal[0]][goal[1]] = 0 
         image_copia[robo[0]][robo[1]] = 0   
@@ -186,14 +191,9 @@ class R2D2(Node):
 
     def transf_coord(self, caminho):
         caminho_simulacao = []
-        for y, x in caminho:
-            # Centralizar as coordenadas (0,0) do mapa real para (0,0) da simulação
-            centralizado_x = x - 200
-            centralizado_y = y - 200
-            
-            # Ajustar a escala para a simulação (0-400 -> -10 a 10)
-            sim_x = (centralizado_x / 200) * 10  # 200 porque metade de 400 equivale a 10 unidades
-            sim_y = (centralizado_y / 200) * -10  # Invertido para ajustar a rotação
+        for x, y in caminho:
+            sim_x = (y - 200) * 0.05 # 200 porque metade de 400 equivale a 10 unidades
+            sim_y = -(x - 200)  * 0.05  # Invertido para ajustar a rotação
             
             # Adicionar a coordenada transformada
             caminho_simulacao.append((sim_x, sim_y))
@@ -213,10 +213,13 @@ class R2D2(Node):
         rclpy.spin_once(self)
 
         self.get_logger().info ('Entrando no loop princial do nó.')
-        
+
+        self.ponto = 0
         self.algoritmo_a_star()
         self.transf_coord(self.caminho)
+        iteracoes = len(self.caminho_simulacao
         self.novoponto = self.caminho_simulacao.pop(0)
+        self.get_logger().info (' caminho = ' + str(self.caminho_simulacao) + '  novo ponto = '  + str(self.novoponto))
 
         while(rclpy.ok):
             
@@ -237,44 +240,51 @@ class R2D2(Node):
             cmd = Twist()
             self.erro_ang = self.angulo_robo - yaw
             self.untillnine()
-            self.get_logger().info (' estado = ' + str(self.mestados) + ' erro de angulo: ' + str(self.erro_ang) + ' dist ponto:' + str(self.dist))
-            self.get_logger().info ( ' ponto atual: ' + str(self.novoponto)  + ' prox ponto:' + str(self.proxponto))
 
-            if(self.dist <= 0.2 and abs(self.erro_ang) <= 0.04):
+            if self.ponto >= (iteracoes -3):  
                 cmd.angular.z = 0.0
                 cmd.linear.x = 0.0
                 self.pub_cmd_vel.publish(cmd)
-                self.get_logger().info ('CHEGOUUUUU')
+                self.get_logger().info('Robô chegou ao destino e parou.')
+                return
+
+            if(self.dist <= 0.4 ):
+                self.ponto = self.ponto +1
+                # cmd.angular.z = 0.0
+                # cmd.linear.x = 0.0
+                self.pub_cmd_vel.publish(cmd)
+                self.get_logger().info ('CHEGOUUUUU, no ponto: '+ str(self.ponto) + '  Coordenada:'+ str(self.novoponto))
                 
                 self.novoponto = self.caminho_simulacao.pop(0)
-                #self.mestados = 0
-                #self.get_logger().debug ("caminho " + str(self.caminho_simulacao))
+                
 
             #olhar para o ponto
             if self.mestados == 0:
-
+                cmd.linear.x = 0.3
                 if(abs(self.erro_ang) >= 0.02): #se a angulacação dele for muito diferente do angulo do ponto
+                    if(abs(self.erro_ang) >= 1):
+                        cmd.linear.x = 0.0
                     cmd.angular.z = 0.4 if self.erro_ang > 0 else -0.4 #giro esquerda
                     self.pub_cmd_vel.publish(cmd)
-                    self.get_logger().info ('TENTANDO VIRAR PRO PONTO CALMA')
-                
+                    #self.get_logger().info ('TENTANDO VIRAR PRO PONTO CALMA')
+
                 else:
                     cmd.angular.z = 0.0
                     self.pub_cmd_vel.publish(cmd)
-                    self.get_logger().info ('olhando para (9;9), dist=' + str(self.dist) + 'dr2d2=' + str(self.pose.position.x)+ str(self.pose.position.y))
+                    #self.get_logger().info ('olhando para (9;9), dist=' + str(self.dist) + 'dr2d2=' + str(self.pose.position.x)+ str(self.pose.position.y))
                     #print(self.dist, self.distancia_frente)
                     self.mestados = 1
                 
         
             elif self.mestados == 1: #andando para o ponto
 
-                self.get_logger().info ('estado = 1, andando')
+                #self.get_logger().info ('estado = 1, andando')
                 cmd.linear.x = 0.5
                 self.pub_cmd_vel.publish(cmd)
-                self.get_logger().debug ("Distância para o ponto" + str(self.dist))
+                #self.get_logger().debug ("Distância para o ponto" + str(self.dist))
 
                 
-                if(self.dist > 1 or self.erro_ang >=0.5):
+                if(self.dist > 0.9 or abs(self.erro_ang) >=0.5):
                     self.mestados = 0
 
 

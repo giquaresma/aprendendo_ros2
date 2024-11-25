@@ -10,8 +10,12 @@ image = plt.imread(pgmf)
 
 image_copia = 1.0 * (image > 250)
 
-goal = (80, 325) 
-robo = (300, 25) 
+kernel = np.ones((18, 18), np.uint8)
+img_dilation = cv2.erode(image_copia, kernel, iterations=1) 
+image_copia = img_dilation
+
+goal = (200, 200)
+robo = (360, 80)
 
 image_copia[goal[0]][goal[1]] = 0 
 image_copia[robo[0]][robo[1]] = 0   
